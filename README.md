@@ -9,10 +9,11 @@ App can be used for tracking the stock of snacks and drinks in nearby vending ma
 - Receive notification when a certain item gets restocked
 
 ## Technologies used :zap:
--Kotlin
--Android Studio
+- [Kotlin](https://kotlinlang.org/)
+- [Android Studio](https://developer.android.com/studio)
 
 ## Donate :hearts:
-If you would like to support this project's further development, the creator of this project or the continuous maintenance of this project, feel free to donate. 
-Your donation is highly appreciated. Thank you!
+If you would like to support this project's further development, 
+the creator of this project or the continuous maintenance of this project, feel free to donate. 
+Your donation is highly appreciated. Thank you!\
 https://paypal.me/avalentincic?country.x=SI&locale.x=en_US
