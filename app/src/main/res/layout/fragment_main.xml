@@ -5,16 +5,11 @@
     android:layout_height="match_parent"
     tools:context=".MainFragment">
 
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent">
-        <org.osmdroid.views.MapView
-            android:id="@+id/mapview"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tilesource="Mapnik" />
-    </LinearLayout>
+    <org.osmdroid.views.MapView
+        android:id="@+id/mapview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tilesource="Mapnik" />
 
 </FrameLayout>
 

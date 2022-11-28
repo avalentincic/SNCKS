@@ -7,3 +7,7 @@ java {
     sourceCompatibility = JavaVersion.VERSION_1_7
     targetCompatibility = JavaVersion.VERSION_1_7
 }
+
+dependencies {
+    implementation 'io.github.serpro69:kotlin-faker:1.12.0'
+}

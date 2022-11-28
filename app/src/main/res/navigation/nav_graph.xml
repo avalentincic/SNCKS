@@ -10,16 +10,17 @@
         android:label="fragment_main"
         tools:layout="@layout/fragment_main" >
         <action
-            android:id="@+id/action_mainFragment_to_addFragment"
-            app:destination="@id/addFragment" />
+            android:id="@+id/action_mainFragment_to_ListFragment"
+            app:destination="@id/ListFragment" />
     </fragment>
+
     <fragment
-        android:id="@+id/addFragment"
-        android:name="com.example.sncksapp.AddFragment"
+        android:id="@+id/ListFragment"
+        android:name="com.example.sncksapp.ListFragment"
         android:label="fragment_add"
-        tools:layout="@layout/fragment_add" >
+        tools:layout="@layout/fragment_list" >
         <action
-            android:id="@+id/action_addFragment_to_mainFragment"
+            android:id="@+id/action_ListFragment_to_mainFragment"
             app:destination="@id/mainFragment" />
     </fragment>
 </navigation>
