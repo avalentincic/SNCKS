@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="my_padding">15dp</dimen>
+    <dimen name="my_margins">30dp</dimen>
+    <dimen name="my_font_size">16sp</dimen>
+    <dimen name="btn_border_radius">32dp</dimen>
+    <dimen name="btn_height">48dp</dimen>
+    <dimen name="btn_small_width">96dp</dimen>
+    <dimen name="btn_big_width">250dp</dimen>
+</resources>

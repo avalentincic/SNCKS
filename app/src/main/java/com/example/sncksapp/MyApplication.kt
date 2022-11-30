@@ -46,4 +46,12 @@ class MyApplication : Application() {
     fun findVendingById(id: String): VendingMachine {
         return vendingMachines.first { it.id.toString().equals(id, true)}
     }
+
+    fun updateVending(id: String, name:String , lat: Double, long:Double){
+        vendingMachines.first { it.id.toString().equals(id, true)}.apply {
+            this.name = name
+            this.latitude = lat
+            this.longitude = long
+        }
+    }
 }

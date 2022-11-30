@@ -48,6 +48,10 @@ class MainActivity : AppCompatActivity() {
                 findNavController(R.id.nav_host_fragment_content_main).navigate(R.id.action_mainFragment_to_ListFragment)
                 true
             }
+            R.id.action_add -> {
+                findNavController(R.id.nav_host_fragment_content_main).navigate(R.id.action_ListFragment_to_editVendingFragment)
+                true
+            }
             else -> super.onOptionsItemSelected(item)
         }
     }

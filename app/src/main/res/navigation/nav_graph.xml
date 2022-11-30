@@ -12,6 +12,9 @@
         <action
             android:id="@+id/action_mainFragment_to_ListFragment"
             app:destination="@id/ListFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_editVendingFragment"
+            app:destination="@id/editVendingFragment" />
     </fragment>
 
     <fragment
@@ -25,6 +28,9 @@
         <action
             android:id="@+id/action_ListFragment_to_detailFragment"
             app:destination="@id/detailFragment" />
+        <action
+            android:id="@+id/action_ListFragment_to_editVendingFragment"
+            app:destination="@id/editVendingFragment" />
     </fragment>
     <fragment
         android:id="@+id/detailFragment"
@@ -34,5 +40,18 @@
         <action
             android:id="@+id/action_detailFragment_to_ListFragment"
             app:destination="@id/ListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/editVendingFragment"
+        android:name="com.example.sncksapp.EditVendingFragment"
+        android:label="Edit Vending"
+        tools:layout="@layout/fragment_edit_vending" >
+        <action
+            android:id="@+id/action_editVendingFragment_to_ListFragment"
+            app:destination="@id/ListFragment"
+            app:popUpTo="@id/mainFragment" />
+        <action
+            android:id="@+id/action_editVendingFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
     </fragment>
 </navigation>

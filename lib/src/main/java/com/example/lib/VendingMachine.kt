@@ -6,9 +6,9 @@ import java.util.UUID
 val faker = faker {  }
 
 class VendingMachine(
-    val name: String,
-    val latitude: Double,
-    val longitude: Double
+    var name: String,
+    var latitude: Double,
+    var longitude: Double
 ) {
     var id: UUID = UUID.randomUUID()
     var items: ArrayList<Item> =  ArrayList<Item>()

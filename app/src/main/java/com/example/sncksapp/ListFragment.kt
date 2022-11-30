@@ -48,20 +48,13 @@ class ListFragment : Fragment() {
             }
 
             override fun onItemLongClick(itemView: View?, position: Int) {
-                /*val builder = AlertDialog.Builder(activity as AppCompatActivity)
-                builder.setTitle("Delete")
-                builder.setMessage(vms[position].name)
-                builder.setIcon(android.R.drawable.ic_dialog_alert)
-                builder.setPositiveButton("Yes"){dialogInterface, which ->
-                    vms.removeAt(position)
-                    adapter.notifyDataSetChanged()
-                    app.saveToFile()
-                }
-                builder.setNegativeButton("No"){dialogInterface, which ->
-                }
-                val alertDialog: AlertDialog = builder.create()
-                alertDialog.setCancelable(false)
-                alertDialog.show()*/
+                val m1 = vms[position]
+                val bundle = bundleOf(
+                    "ID" to m1.id.toString()
+                )
+                findNavController().navigate(
+                    R.id.action_ListFragment_to_editVendingFragment, bundle
+                )
             }
 
             override fun onItemDrag(itemView: View?, position: Int) {

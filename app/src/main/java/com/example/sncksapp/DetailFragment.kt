@@ -66,6 +66,7 @@ class DetailFragment : Fragment() {
 
 class ItemsAdapter(private val mItems: ArrayList<Item>) : RecyclerView.Adapter<ItemsAdapter.ViewHolder>() {
 
+    /*
     interface MyOnClick {
         fun onItemClick(itemView: View?, position: Int)
         fun onItemLongClick(itemView: View?, position: Int)
@@ -75,7 +76,7 @@ class ItemsAdapter(private val mItems: ArrayList<Item>) : RecyclerView.Adapter<I
 
     fun setOnItemClickListener(listener: MyOnClick) {
         this.listener = listener
-    }
+    }*/
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val imageViewIcon: ImageView = itemView.findViewById(R.id.ivItemIcon)
@@ -84,6 +85,7 @@ class ItemsAdapter(private val mItems: ArrayList<Item>) : RecyclerView.Adapter<I
         val priceTextView: TextView = itemView.findViewById(R.id.tvPrice)
         val reminderBtn: Button = itemView.findViewById(R.id.btnReminder)
 
+        /*
         init {
 
             itemView.setOnLongClickListener {
@@ -100,7 +102,7 @@ class ItemsAdapter(private val mItems: ArrayList<Item>) : RecyclerView.Adapter<I
                     listener.onItemClick(itemView, position)
                 }
             }
-        }
+        }*/
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
