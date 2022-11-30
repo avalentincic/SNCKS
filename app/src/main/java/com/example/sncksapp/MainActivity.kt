@@ -1,6 +1,5 @@
 package com.example.sncksapp
 
-import android.app.Activity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -10,6 +9,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
+import com.example.lib.VendingMachine
 import com.example.sncksapp.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -23,6 +23,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         app = application as MyApplication
 
+        //load data from json file
         app.initData()
 
         binding = ActivityMainBinding.inflate(layoutInflater)

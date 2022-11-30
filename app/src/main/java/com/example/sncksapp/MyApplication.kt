@@ -22,11 +22,6 @@ class MyApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         vendingMachines = ArrayList<VendingMachine>()
-        /*
-        vendingMachines.add(VendingMachine("Tehniske Fakultete", 46.5591867630629, 15.640038132937804))
-        vendingMachines.add(VendingMachine("FERI", 46.55946824670187, 15.638200184963964))
-        vendingMachines[0].generate(10)
-        vendingMachines[1].generate(10)*/
         gson = Gson()
         file = File(filesDir, MY_FILE_NAME)
     }
@@ -46,5 +41,9 @@ class MyApplication : Application() {
         } catch (e: IOException) {
             ArrayList()
         }
+    }
+
+    fun findVendingById(id: String): VendingMachine {
+        return vendingMachines.first { it.id.toString().equals(id, true)}
     }
 }

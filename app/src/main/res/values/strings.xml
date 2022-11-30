@@ -5,4 +5,8 @@
     <string name="add">Add</string>
     <string name="list">Vending Machines</string>
     <string name="name">Name</string>
+    <string name="qty">Qty</string>
+    <string name="price">Price</string>
+    <string name="test1">Test1</string>
+    <string name="remind_me">Remind Me</string>
 </resources>

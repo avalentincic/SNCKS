@@ -50,10 +50,6 @@ class MainFragment : Fragment() {
         }
     }
 
-    override fun onStart() {
-        super.onStart()
-        (activity as AppCompatActivity).supportActionBar?.title = "SNCKS"
-    }
 
     override fun onResume() {
         super.onResume()

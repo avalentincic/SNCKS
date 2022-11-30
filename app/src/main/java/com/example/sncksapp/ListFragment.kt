@@ -1,28 +1,24 @@
 package com.example.sncksapp
 
 import android.os.Bundle
+import android.util.Log
+import android.view.DragEvent
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.os.bundleOf
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.lib.VendingMachine
 import com.example.sncksapp.databinding.FragmentListBinding
+import com.squareup.picasso.Picasso
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [ListFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class ListFragment : Fragment() {
 
     private var _binding: FragmentListBinding? = null
@@ -30,15 +26,61 @@ class ListFragment : Fragment() {
 
     private lateinit var app: MyApplication
     lateinit var vms: ArrayList<VendingMachine>
-    lateinit var adapter: GoodsAdapter
+    lateinit var adapter: MachinesAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentListBinding.inflate(inflater, container, false)
         app = activity?.application as MyApplication
 
-        var rvItems = binding.rvItems
+        val rvItems = binding.rvItems
         vms = app.vendingMachines
-        adapter = GoodsAdapter(vms)
+        adapter = MachinesAdapter(vms)
+
+        adapter.setOnItemClickListener(object: MachinesAdapter.MyOnClick{
+            override fun onItemClick(itemView: View?, position: Int) {
+                val m1 = vms[position]
+                val bundle = bundleOf(
+                    "ID" to m1.id.toString()
+                )
+                findNavController().navigate(
+                    R.id.action_ListFragment_to_detailFragment, bundle
+                )
+            }
+
+            override fun onItemLongClick(itemView: View?, position: Int) {
+                /*val builder = AlertDialog.Builder(activity as AppCompatActivity)
+                builder.setTitle("Delete")
+                builder.setMessage(vms[position].name)
+                builder.setIcon(android.R.drawable.ic_dialog_alert)
+                builder.setPositiveButton("Yes"){dialogInterface, which ->
+                    vms.removeAt(position)
+                    adapter.notifyDataSetChanged()
+                    app.saveToFile()
+                }
+                builder.setNegativeButton("No"){dialogInterface, which ->
+                }
+                val alertDialog: AlertDialog = builder.create()
+                alertDialog.setCancelable(false)
+                alertDialog.show()*/
+            }
+
+            override fun onItemDrag(itemView: View?, position: Int) {
+                val builder = AlertDialog.Builder(activity as AppCompatActivity)
+                builder.setTitle("Delete")
+                builder.setMessage(vms[position].name)
+                builder.setIcon(android.R.drawable.ic_dialog_alert)
+                builder.setPositiveButton("Yes"){dialogInterface, which ->
+                    vms.removeAt(position)
+                    adapter.notifyDataSetChanged()
+                    app.saveToFile()
+                }
+                builder.setNegativeButton("No"){dialogInterface, which ->
+                }
+                val alertDialog: AlertDialog = builder.create()
+                alertDialog.setCancelable(false)
+                alertDialog.show()
+            }
+        })
 
 
         rvItems.adapter = adapter
@@ -49,7 +91,7 @@ class ListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        (activity as AppCompatActivity).supportActionBar?.title = "Vending Machines"
+        //(activity as AppCompatActivity).supportActionBar?.title = "Vending Machines"
     }
 
     override fun onDestroyView() {
@@ -58,11 +100,12 @@ class ListFragment : Fragment() {
     }
 }
 
-class GoodsAdapter(private val vendingMachines: ArrayList<VendingMachine>) : RecyclerView.Adapter<GoodsAdapter.ViewHolder>() {
+class MachinesAdapter(private val vendingMachines: ArrayList<VendingMachine>) : RecyclerView.Adapter<MachinesAdapter.ViewHolder>() {
 
     interface MyOnClick {
         fun onItemClick(itemView: View?, position: Int)
         fun onItemLongClick(itemView: View?, position: Int)
+        fun onItemDrag(itemView: View?, position: Int)
     }
 
     private lateinit var listener: MyOnClick
@@ -73,9 +116,7 @@ class GoodsAdapter(private val vendingMachines: ArrayList<VendingMachine>) : Rec
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val imageViewIcon: ImageView = itemView.findViewById(R.id.imageViewIcon)
-        val nameTextView: TextView = itemView.findViewById(R.id.tvGood_name)
-        val qtyTextView: TextView = itemView.findViewById(R.id.tvQuantity)
-        val priceTextView: TextView = itemView.findViewById(R.id.tvPrice)
+        val nameTextView: TextView = itemView.findViewById(R.id.tvMachine_name)
 
         init {
 
@@ -93,6 +134,7 @@ class GoodsAdapter(private val vendingMachines: ArrayList<VendingMachine>) : Rec
                     listener.onItemClick(itemView, position)
                 }
             }
+
         }
     }
 
@@ -111,16 +153,10 @@ class GoodsAdapter(private val vendingMachines: ArrayList<VendingMachine>) : Rec
         val tvName = holder.nameTextView
         tvName.text = vendingM.name
 
-        val tvQty = holder.qtyTextView
-        tvQty.text = vendingM.latitude.toString()
-
-        val tvPrice = holder.priceTextView
-        tvPrice.text = vendingM.longitude.toString()
-
-        /*Picasso.get().load(R.drawable.hand_truck)
-            .placeholder(R.drawable.hand_truck)
+        Picasso.get().load(R.drawable.vending_machine)
+            .placeholder(R.drawable.vending_machine)
             .fit()
-            .into(holder.imageViewIcon)*/
+            .into(holder.imageViewIcon)
     }
 
     override fun getItemCount(): Int {
