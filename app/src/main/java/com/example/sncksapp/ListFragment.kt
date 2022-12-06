@@ -37,6 +37,7 @@ class ListFragment : Fragment() {
         adapter = MachinesAdapter(vms)
 
         adapter.setOnItemClickListener(object: MachinesAdapter.MyOnClick{
+
             override fun onItemClick(itemView: View?, position: Int) {
                 val m1 = vms[position]
                 val bundle = bundleOf(
