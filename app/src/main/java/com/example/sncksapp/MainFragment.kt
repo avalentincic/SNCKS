@@ -1,17 +1,28 @@
 package com.example.sncksapp
 
+import android.app.PendingIntent.getActivity
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.core.content.ContextCompat
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
+import androidx.navigation.fragment.findNavController
 import com.example.lib.VendingMachine
 import com.example.sncksapp.databinding.FragmentMainBinding
+import kotlinx.coroutines.MainScope
 import org.osmdroid.config.Configuration
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory
 import org.osmdroid.util.GeoPoint
 import org.osmdroid.views.MapView
 import org.osmdroid.views.overlay.Marker
+import org.osmdroid.views.overlay.Marker.OnMarkerClickListener
+import java.security.AccessController.getContext
 
 
 private const val ARG_PARAM1 = "param1"
@@ -42,7 +53,7 @@ class MainFragment : Fragment() {
         val startPoint = GeoPoint(46.559113978089606, 15.639132629280839)
         mapController.setCenter(startPoint)
 
-        handleMarkers(app.vendingMachines, map)
+        handleMarkers(app.vendingMachines, map, this, requireContext())
 
         return binding.root
     }
@@ -74,7 +85,7 @@ class MainFragment : Fragment() {
     }
 }
 
-fun handleMarkers(items: ArrayList<VendingMachine>, m:MapView){
+fun handleMarkers(items: ArrayList<VendingMachine>, m:MapView, fragment: Fragment, context: Context){
     val markers: MutableList<Marker> = ArrayList()
 
     for (vm in items) {
@@ -84,13 +95,29 @@ fun handleMarkers(items: ArrayList<VendingMachine>, m:MapView){
         val marker = Marker(m)
         marker.position = markerLocation
         marker.title = vm.name
-        //marker.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE))
-
+        //marker.icon = ContextCompat.getDrawable(context,R.drawable.vending_machine)
+        marker.setOnMarkerClickListener(CustomMarkerClickListener(marker, m, fragment, vm.id.toString()))
         markers.add(marker)
     }
 
     m.overlays.addAll(markers)
     m.invalidate()
+}
+
+class CustomMarkerClickListener(marker: Marker, mapView: MapView?, fragment: Fragment, id: String): OnMarkerClickListener {
+
+    private val mFragment : Fragment = fragment
+    private val mID : String = id
+
+    override fun onMarkerClick(marker: Marker?, mapView: MapView?): Boolean {
+        val bundle = bundleOf(
+            "ID" to mID
+        )
+        findNavController(mFragment).navigate(
+            R.id.action_mainFragment_to_detailFragment, bundle
+        )
+        return true
+    }
 }
 
 /*
