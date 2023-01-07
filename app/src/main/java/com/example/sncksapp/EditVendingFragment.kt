@@ -72,6 +72,7 @@ class EditVendingFragment : Fragment() {
             app.vendingMachines.add(VendingMachine(name, lat, long))
         }
         app.saveToFile()
+        app.saveToDB()
     }
 
 }

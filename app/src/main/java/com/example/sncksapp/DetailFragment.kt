@@ -126,7 +126,7 @@ class ItemsAdapter(private val mItems: ArrayList<Item>) : RecyclerView.Adapter<I
         val tvPrice = holder.priceTextView
         tvPrice.text = item.price.toString()
 
-        if (item.quantity > 0){
+        if (item.quantity!! > 0){
             holder.reminderBtn.visibility = View.INVISIBLE
         }
 

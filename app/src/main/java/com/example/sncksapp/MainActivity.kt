@@ -25,6 +25,7 @@ class MainActivity : AppCompatActivity() {
 
         //load data from json file
         app.initData()
+        //app.readFromDB()
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)

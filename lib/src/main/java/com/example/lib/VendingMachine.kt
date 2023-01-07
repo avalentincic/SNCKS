@@ -6,11 +6,11 @@ import java.util.UUID
 val faker = faker {  }
 
 class VendingMachine(
-    var name: String,
-    var latitude: Double,
-    var longitude: Double
+    var name: String? = "",
+    var latitude: Double? = 0.0,
+    var longitude: Double? = 0.0
 ) {
-    var id: UUID = UUID.randomUUID()
+    var id: String = UUID.randomUUID().toString()
     var items: ArrayList<Item> =  ArrayList<Item>()
 
     override fun toString(): String {
@@ -30,7 +30,7 @@ class VendingMachine(
     }
 
     fun updateItem(id:String, name: String, qty: Int, price: Double){
-        items.first { it.id.toString().equals(id, true)}.apply {
+        items.first { it.id.equals(id, true)}.apply {
             this.name = name
             this.quantity = qty
             this.price = price

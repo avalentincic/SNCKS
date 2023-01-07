@@ -3,6 +3,10 @@ package com.example.sncksapp
 import android.app.Application
 import android.util.Log
 import com.example.lib.VendingMachine
+import com.google.firebase.database.*
+import com.google.firebase.database.ktx.database
+import com.google.firebase.database.ktx.getValue
+import com.google.firebase.ktx.Firebase
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import org.apache.commons.io.FileUtils
@@ -15,6 +19,7 @@ const val MY_FILE_NAME = "mydata.json"
 
 class MyApplication : Application() {
 
+    lateinit var database: DatabaseReference
     lateinit var vendingMachines: ArrayList<VendingMachine>
     private lateinit var gson: Gson
     private lateinit var file: File
@@ -24,6 +29,7 @@ class MyApplication : Application() {
         vendingMachines = ArrayList<VendingMachine>()
         gson = Gson()
         file = File(filesDir, MY_FILE_NAME)
+        database = Firebase.database("https://sncks-app-pora-default-rtdb.europe-west1.firebasedatabase.app/").reference
     }
 
     fun saveToFile() {
@@ -41,6 +47,28 @@ class MyApplication : Application() {
         } catch (e: IOException) {
             ArrayList()
         }
+    }
+
+    fun saveToDB() {
+        database.child("vending_machines").setValue(vendingMachines)
+    }
+
+    fun readFromDB() {
+        database.addValueEventListener(object : ValueEventListener {
+
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+
+                val arrayList = dataSnapshot.child("vending_machines").getValue<ArrayList<VendingMachine>>()
+                println("DB: ")
+                println(arrayList.toString())
+                vendingMachines = arrayList!!
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+                // Handle error
+            }
+        })
+
     }
 
     fun findVendingById(id: String): VendingMachine {
