@@ -21,9 +21,9 @@ class VendingMachine(
         for (i in 1..n){
             items.add(
                 Item(
-                    faker.food.dish(),
-                    faker.random.nextInt(intRange = 0..10),
-                    faker.random.nextDouble() + faker.random.nextInt(intRange = 0..5)
+                    name=faker.food.dish(),
+                    quantity=faker.random.nextInt(intRange = 0..10),
+                    price=faker.random.nextDouble() + faker.random.nextInt(intRange = 0..5)
                 )
             )
         }

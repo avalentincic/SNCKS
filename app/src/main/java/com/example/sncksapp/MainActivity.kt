@@ -1,11 +1,17 @@
 package com.example.sncksapp
 
+import android.content.Context
 import android.os.Bundle
+import android.util.AttributeSet
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.os.bundleOf
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
@@ -24,8 +30,8 @@ class MainActivity : AppCompatActivity() {
         app = application as MyApplication
 
         //load data from json file
-        app.initData()
-        //app.readFromDB()
+        //app.initData()
+        app.readFromDB()
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -35,6 +41,18 @@ class MainActivity : AppCompatActivity() {
         navController = findNavController(R.id.nav_host_fragment_content_main)
         appBarConfiguration = AppBarConfiguration(navController.graph)
         setupActionBarWithNavController(navController, appBarConfiguration)
+
+        val fragmentName = intent.getStringExtra("fragment")
+        val vmID = intent.getStringExtra("ID")
+        if (fragmentName == "detailFragment") {
+            val bundle = bundleOf(
+                "ID" to vmID
+            )
+            navController.navigate(
+                R.id.action_mainFragment_to_detailFragment, bundle
+            )
+        }
+        Log.i("FR", intent.extras.toString())
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
