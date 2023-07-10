@@ -23,7 +23,7 @@ import java.lang.reflect.Type
 
 
 const val MY_FILE_NAME = "mydata.json"
-const val TAG = "DB"
+const val TAG = "DB" //
 
 class MyApplication : Application() {
 
